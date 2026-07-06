@@ -1,6 +1,6 @@
 # PharmaContent — GenAI Content Generator for Medical Affairs
 
-🔗 **Live Demo**: coming soon
+🔗 **Live Demo**: https://pharma-content-generator.streamlit.app
 
 A GenAI-powered content generation platform for medical affairs teams,
 built on Snowflake Cortex and Model Context Protocol (MCP).
