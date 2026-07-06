@@ -15,23 +15,47 @@ app = Server("pharma-content-mcp")
 
 
 def get_snowflake_connection():
-    with open(os.getenv("SNOWFLAKE_PRIVATE_KEY_PATH"), "rb") as key_file:
+    from cryptography.hazmat.primitives import serialization
+    import os
+
+    try:
+        import streamlit as st
+        private_key_text = st.secrets["private_key"]
         private_key = serialization.load_pem_private_key(
-            key_file.read(), password=None
+            private_key_text.encode(), password=None
         )
+        account = st.secrets["SNOWFLAKE_ACCOUNT"]
+        user = st.secrets["SNOWFLAKE_USER"]
+        role = st.secrets["SNOWFLAKE_ROLE"]
+        warehouse = st.secrets["SNOWFLAKE_WAREHOUSE"]
+        database = st.secrets["SNOWFLAKE_DATABASE"]
+        schema = st.secrets.get("SNOWFLAKE_SCHEMA", "marts")
+    except Exception:
+        with open(os.getenv("SNOWFLAKE_PRIVATE_KEY_PATH"), "rb") as key_file:
+            private_key = serialization.load_pem_private_key(
+                key_file.read(), password=None
+            )
+        account = os.getenv("SNOWFLAKE_ACCOUNT")
+        user = os.getenv("SNOWFLAKE_USER")
+        role = os.getenv("SNOWFLAKE_ROLE")
+        warehouse = os.getenv("SNOWFLAKE_WAREHOUSE")
+        database = os.getenv("SNOWFLAKE_DATABASE")
+        schema = os.getenv("SNOWFLAKE_SCHEMA", "marts")
+
     private_key_bytes = private_key.private_bytes(
         encoding=serialization.Encoding.DER,
         format=serialization.PrivateFormat.PKCS8,
         encryption_algorithm=serialization.NoEncryption()
     )
+
     return snowflake.connector.connect(
-        account=os.getenv("SNOWFLAKE_ACCOUNT"),
-        user=os.getenv("SNOWFLAKE_USER"),
+        account=account,
+        user=user,
         private_key=private_key_bytes,
-        role=os.getenv("SNOWFLAKE_ROLE"),
-        warehouse=os.getenv("SNOWFLAKE_WAREHOUSE"),
-        database=os.getenv("SNOWFLAKE_DATABASE"),
-        schema=os.getenv("SNOWFLAKE_SCHEMA")
+        role=role,
+        warehouse=warehouse,
+        database=database,
+        schema=schema
     )
 
 
