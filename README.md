@@ -89,6 +89,7 @@ streamlit run app.py
 ---
 
 ## Project Structure
+```
 pharma-content-generator/
 ├── app.py                      # Streamlit 4-tab UI
 ├── src/
@@ -97,6 +98,7 @@ pharma-content-generator/
 ├── docs/
 ├── requirements.txt
 └── README.md
+```
 ---
 
 ## Author
