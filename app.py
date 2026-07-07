@@ -42,6 +42,18 @@ with st.sidebar:
     🗂️ **Audit Trail**
     Every generated document versioned and tracked
     """)
+
+    st.divider()
+    st.info(
+        "ℹ️ **Portfolio Demo**\n\n"
+        "Running on a Snowflake trial account. "
+        "If the app is slow to respond, the warehouse "
+        "may be warming up — please wait 10-15 seconds "
+        "and try again.\n\n"
+        "Built by Nivetha Jayaram Raja · "
+        "[LinkedIn](https://www.linkedin.com/in/nivetha-jayaram-raja-data-analytics/)"
+    )
+
     st.divider()
     st.header("MCP Tools Available")
     tools = [
