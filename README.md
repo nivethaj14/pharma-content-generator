@@ -18,6 +18,7 @@ human review loop and full audit trail — critical for pharma compliance.
 ---
 
 ## Architecture
+```
 Clinical Trial Data (Snowflake)     FDA FAERS Signals (Snowflake)
 FDA Guidance Docs (Cortex Search)
 ↓
@@ -32,6 +33,7 @@ Human Review Loop
 ↓
 Audit Trail (Snowflake)
 (version, model, status)
+```
 ---
 
 ## MCP Tools
